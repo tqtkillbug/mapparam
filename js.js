@@ -36,7 +36,7 @@ for(var i=0; i<quey.length;i++) {
     }
 }
     $.ajax({
-        url: 'http://sqlformat.org/api/v1/format',
+        url: 'https://sqlformat.org/api/v1/format',
         type: 'POST',
         dataType: 'json',
         crossDomain: true,
@@ -71,3 +71,13 @@ function setCharAt(str,index,chr) {
     return str.substring(0,index) + chr + str.substring(index+1);
 }
 
+function copy() {
+    var text = document.getElementById("result").value;
+    var sampleTextarea = document.createElement("textarea");
+    document.body.appendChild(sampleTextarea);
+    sampleTextarea.value = text; //save main text in it
+    sampleTextarea.select(); //select textarea contenrs
+    document.execCommand("copy");
+    document.body.removeChild(sampleTextarea);
+  }
+  
