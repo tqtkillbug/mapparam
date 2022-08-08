@@ -53,8 +53,11 @@ function getPramByIndex(indexs) {
         const element = listParamObj[index];
         if(element.index == indexs){
             var vl;
-            switch (element.type) {
-               case "String":
+            switch (element.type.toLowerCase()) {
+               case "string":
+                   vl = '"'+element.vl.trim()+'"'
+                   break;
+                   case "timestamp":
                    vl = '"'+element.vl.trim()+'"'
                    break;
                default:
