@@ -63,9 +63,12 @@ function getPramByIndex(indexs) {
                default:
                    vl = element.vl;
             }
-            return vl;
-          }
+        }
+        if(element.vl == null){
+            vl = element.vl
+        }
     }
+    return vl;
 }
 
 
