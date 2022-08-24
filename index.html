@@ -11,13 +11,14 @@
 <body>
     
     <div class="container">
+      <marquee>Update: Check Null Param | Add Loading Spiner | Not Need Reload When New Mapping   &nbsp;	&nbsp;  &nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	  <span style="color: rgb(1, 147, 1); font-weight: bold;"> "No pressure, no diamonds." Thomas Carlyle  <span>  &nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;     </marquee>
        <div class="row mt-5">
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="queyinput" placeholder="name@example.com">
             <label for="floatingInput">Logback Query</label>
           </div>
           <div class="text-center">
-            <button class="btn btn-primary" onclick="mappingParam()">Map</button>
+            <button class="btn btn-primary" onclick="mappingParam()" data-bs-toggle="modal" data-bs-target="#loadingModal">Map</button>
            
           </div>
           <div class="form-floating mt-2">
@@ -38,6 +39,55 @@
       </div>
        </div>
       </div>
+
+      <!-- Modal -->
+<div class="modal fade " id="loadingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="row"> 
+        <div class="col-2">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="spinner-border text-secondary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+
+        </div>
+        <div class="col-2">
+          
+      <div class="spinner-border text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+        </div>
+        <div class="col-2">
+          <div class="spinner-border text-warning" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="spinner-border text-info" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+     
+     
+     
+   
+    
+    
+     
+    </div>
+  </div>
+</div>
 <footer class="bg-secondary text-center footer">Develop By TQT</footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

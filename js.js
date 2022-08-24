@@ -16,7 +16,12 @@ for (let i = 0; i < listParam.length; i++) {
     var arr = listParam[i].split("(");
     var vl = arr[0];
     var type = arr[1];
-    type = type.substring(0, type.length - 1);
+    console.log(type);
+    if(type !== "" && type !== undefined && type !== null){
+        type = type.substring(0, type.length - 1);
+    } else {
+        type = null;
+    }
 
     const paramObj = {
         vl: vl,
@@ -43,7 +48,12 @@ for(var i=0; i<quey.length;i++) {
         data: {sql: quey, reindent: 1},
         success: (data)=>{
               document.getElementById('result').value = data.result;
+                $("#loadingModal").modal('hide');
         },
+        done: ()=>{
+            $("#loadingModal").modal('hide');
+
+        }
     });
 
 }
@@ -53,19 +63,21 @@ function getPramByIndex(indexs) {
         const element = listParamObj[index];
         if(element.index == indexs){
             var vl;
-            switch (element.type.toLowerCase()) {
-               case "string":
-                   vl = '"'+element.vl.trim()+'"'
-                   break;
-                   case "timestamp":
-                   vl = '"'+element.vl.trim()+'"'
-                   break;
-               default:
-                   vl = element.vl;
+            if(element.type !== null){
+                switch (element.type.toLowerCase()) {
+                    case "string":
+                        vl = '"'+element.vl.trim()+'"'
+                        break;
+                        case "timestamp":
+                        vl = '"'+element.vl.trim()+'"'
+                        break;
+                    default:
+                        vl = element.vl;
+                 }
+            } else {
+                vl = element.vl;
             }
-        }
-        if(element.vl == null){
-            vl = element.vl
+            
         }
     }
     return vl;
