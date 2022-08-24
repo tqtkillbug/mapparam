@@ -98,4 +98,8 @@ function copy() {
     document.execCommand("copy");
     document.body.removeChild(sampleTextarea);
   }
+
+function removeNotification(){
+  $("#noti").remove();
+}
   
