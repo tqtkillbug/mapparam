@@ -98,6 +98,7 @@ function copy() {
     document.execCommand("copy");
     document.body.removeChild(sampleTextarea);
   }
+<<<<<<< HEAD
   
 
   async  function  pasteQuery(){
@@ -109,3 +110,10 @@ function copy() {
     const text = await navigator.clipboard.readText();
     $("#paramInput").val(text);
   }
+=======
+
+function removeNotification(){
+  $("#noti").remove();
+}
+  
+>>>>>>> 0b476fb7c367570303a2c3bcca8786e45ec34319
