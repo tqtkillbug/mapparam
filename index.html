@@ -13,17 +13,17 @@
     <div class="container">
       <marquee>Update: Check Null Param | Add Loading Spiner | Not Need Reload When New Mapping   &nbsp;	&nbsp;  &nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	  <span style="color: rgb(1, 147, 1); font-weight: bold;"> "No pressure, no diamonds." Thomas Carlyle  <span>  &nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;     </marquee>
        <div class="row mt-5">
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="queyinput" placeholder="name@example.com">
-            <label for="floatingInput">Logback Query</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="queyinput" placeholder="Logback Query" aria-label="Logback Query" aria-describedby="button-addon1">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon1" onclick="pasteQuery()">Paste</button>
           </div>
           <div class="text-center">
             <button class="btn btn-primary" onclick="mappingParam()" data-bs-toggle="modal" data-bs-target="#loadingModal">Map</button>
-           
           </div>
-          <div class="form-floating mt-2">
-            <input type="text" class="form-control" id="paramInput" placeholder="Password">
-            <label for="floatingPassword">Param</label>
+         
+          <div class="input-group mb-3 mt-3">
+            <input type="text" class="form-control" id="paramInput" placeholder="Param" aria-label="Param" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="pasteParm()">Paste</button>
           </div>
        </div>
      

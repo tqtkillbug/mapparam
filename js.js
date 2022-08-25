@@ -99,3 +99,13 @@ function copy() {
     document.body.removeChild(sampleTextarea);
   }
   
+
+  async  function  pasteQuery(){
+    const text = await navigator.clipboard.readText();
+    $("#queyinput").val(text);
+  }
+
+  async  function  pasteParm(){
+    const text = await navigator.clipboard.readText();
+    $("#paramInput").val(text);
+  }
