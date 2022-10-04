@@ -15,3 +15,16 @@
     background-color: transparent !important;
     border:  none !important;
   }
+  video{
+    margin-left: -270px;
+  }
+  .container{
+    height: 90vh !important;
+  }
+  .btn-info{
+   position: absolute;
+   bottom: 10%;
+   left: 90%;
+   color: white;
+  }
+  
