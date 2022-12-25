@@ -1,24 +1,27 @@
-
+pingServer();
 function mappingParam() {
+const mappingBtn = document.getElementById("map-btn");
 var listParamObj = [];
     var quey = document.getElementById("queyinput").value
     var param = document.getElementById("paramInput").value
     var listParam = param.split(',');
     for (let i = 0; i < listParam.length; i++) {
         listParam[i].trim();
+        if(!listParam[i].includes('(') || !listParam[i].includes(')')){
+            if(listParam[i] !== "null"){
+                showToast(4, "Input valid, try again or view tutorial")
+                return
+            }
+        }
         var arr = listParam[i].split("(");
         var vl = arr[0];
         var type = arr[1];
         if (type !== "" && type !== undefined && type !== null) {
             type = type.substring(0, type.length - 1);
+        } else if(type == undefined && vl === "null"){
+            type = null;
         } else {
-            $("#loadingModal").modal('hide');
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Input valid, try again or view tutorial',
-            })
-            $("#loadingModal").modal('hide');
+           showToast(4, "Input valid, try again or view tutorial")
             return
         }
         const paramObj = {
@@ -36,18 +39,12 @@ var listParamObj = [];
         }
     }
 
-    console.log(listParamObj.length);
-    console.log(count);
     if (listParamObj.length !== count) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Input valid, try again or view tutorial',
-        })
+        showToast(4, "Input valid, try again or view tutorial")
         return
     }
-
-    $("#loadingModal").modal('show');
+ 
+  mappingBtn.classList.add("loading");
     $.ajax({
         url: 'https://sqlformat.org/api/v1/format',
         type: 'POST',
@@ -59,14 +56,17 @@ var listParamObj = [];
         },
         success: (data) => {
             document.getElementById('result').value = data.result;
-            $("#loadingModal").modal('hide');
+            showToast(2,"Mapping Param To Query Success")
+            mappingBtn.classList.remove("loading")
+        },
+        error:() =>{
+          showToast(3,"Mapping Param Erorr Please Try Again!")
+          mappingBtn.classList.remove("loading")
         },
         done: () => {
-            $("#loadingModal").modal('hide');
-
+            mappingBtn.classList.remove("loading")
         }
     });
-
 }
 
 function getPramByIndex(indexs,listParamObj) {
@@ -88,7 +88,6 @@ function getPramByIndex(indexs,listParamObj) {
             } else {
                 vl = element.vl;
             }
-
         }
     }
     return vl;
@@ -108,6 +107,7 @@ function copy() {
     sampleTextarea.select(); //select textarea contenrs
     document.execCommand("copy");
     document.body.removeChild(sampleTextarea);
+    showToast(1, "Copied SQL !")
 }
 
 
@@ -120,3 +120,59 @@ async function pasteParm() {
     const text = await navigator.clipboard.readText();
     $("#paramInput").val(text);
 }
+
+function pingServer(){
+    $.ajax({
+        url: 'http://129.152.0.253:8088/api/v1/free/app/ping',
+        type: 'POST',
+        dataType: 'json',
+        crossDomain: true,
+        data: {
+            appName : "MAP"
+        },
+        success: (data) => {
+           $("#notify").html(data.lastNotify)
+        },
+        done: () => {
+
+        }
+    });
+}
+
+
+
+///////////////////////
+function showToast(type,message){
+    switch(type) {
+      case 1:
+        iziToast.show({
+          theme: 'dark',
+          position : "bottomLeft",
+          displayMode: 'replace',
+          message: message,
+          progressBarColor: 'rgb(0, 255, 184)',
+        });
+        break;
+      case 2:
+        iziToast.success({
+          displayMode: 'replace',
+          position : "bottomLeft",
+          message: message,
+        });
+        break;
+        case 3:
+          iziToast.error({
+          displayMode: 'replace',
+          position : "bottomLeft",
+          message:message,
+        });
+        break;
+          case 4:
+            iziToast.warning({
+                 displayMode: 'replace',
+                 position : "bottomLeft",
+                 message:message,
+              });
+        break;
+    }
+  }

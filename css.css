@@ -1,15 +1,27 @@
 .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: red;
+  position: fixed;
+  left: 0;
+  bottom: 6px;
+  width: 100%;
+  color: white;
+  text-align: center;
+  font-style: inherit;
+  font-weight: 600;
+  }
+  #notify{
     color: white;
-    text-align: center;
+    font-size: 15px;
+    padding-top: 5px;
+    font-family: initial;
   }
   body{
-    background: rgb(238,174,202);
-    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(218,191,181,1) 25%, rgba(148,187,233,1) 100%);
+    background-image: url("public/bg4.png");
+    background-color: #cccccc;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    
   }
   .modal-content{
     background-color: transparent !important;
@@ -19,7 +31,7 @@
     margin-left: -270px;
   }
   .container{
-    height: 90vh !important;
+    height: 100vh !important;
   }
   .btn-info{
    position: absolute;
@@ -27,4 +39,151 @@
    left: 90%;
    color: white;
   }
+
+
   
+  .container-vs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .uppercase {
+    text-transform: uppercase;
+  }
+  
+  .btn {
+    display: inline-block;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    transition: all 200ms ease-in;
+    cursor: pointer;
+  }
+  .btn--primary {
+    background: #7f8ff4;
+    color: #fff;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    padding: 12px 36px;
+  }
+  .btn--primary:hover {
+    background: #6c7ff2;
+  }
+  .btn--primary:active {
+    background: #7f8ff4;
+    box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn--yellow {
+    background: #efce2d;
+    color: #000;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    padding: 12px 36px;
+  }
+  .btn--yellow:hover {
+    background: #f7dc54;
+  }
+  .btn--yellow:active {
+    background: #fae57b;
+    box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn--inside {
+    margin-left: -60px;
+  }
+
+  .btn--inside_r{
+    margin-left: -60px;
+    margin-top: -80px;
+  }
+  
+  .form__field {
+    width: 1236px;
+    background: #fff;
+    color: #000000;
+    font: icon;
+    font-size: 19px;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+    border: 0;
+    outline: 0;
+    padding: 18px 0;
+    padding-right: 70px  !important;
+    padding-left: 18px  !important;
+  }
+
+  .form__field_r{
+    width: 1179px;
+    background: #fff;
+    color: #000000;
+    font: icon;
+    font-size: 19px;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+    border: 0;
+    outline: 0;
+    padding: 18px 18px;
+  }
+
+
+  .action-btn {
+    background-color: #FF7F00;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0.5em 1.25em;
+    color: white;
+    border-radius: 0.15em;
+    transition: 0.3s;
+    cursor: pointer;
+    position: relative;
+    display: block;
+  }
+  
+  .action-btn:hover {
+    background-color: #ff6600;
+  }
+  
+  .action-btn:focus {
+    outline: 0.05em dashed #ff6600; 
+    outline-offset: 0.05em;
+  }
+  
+  .action-btn::after {
+    content: '';
+    display: block;
+    width: 1.2em;
+    height: 1.2em;
+    position: absolute;
+    left: calc(50% - 0.75em);
+    top: calc(50% - 0.75em);
+    border: 0.15em solid transparent;
+    border-right-color: white;
+    border-radius: 50%;
+    animation: button-anim 0.7s linear infinite;
+    opacity: 0;
+  }
+  
+  @keyframes button-anim {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .action-btn.loading {
+    color: transparent;
+  }
+  
+  .action-btn.loading::after {
+    opacity: 1;
+  }
+  
+  /* em values are used to adjust button values such as padding, radius etc. based on font-size */
