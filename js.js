@@ -1,4 +1,4 @@
-pingServer();
+// pingServer();
 function mappingParam() {
 const mappingBtn = document.getElementById("map-btn");
 var listParamObj = [];
