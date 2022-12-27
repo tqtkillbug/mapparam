@@ -30,7 +30,7 @@
   video{
     margin-left: -270px;
   }
-  .container{
+  .container-fluid{
     height: 100vh !important;
   }
   .btn-info{
@@ -187,3 +187,44 @@
   }
   
   /* em values are used to adjust button values such as padding, radius etc. based on font-size */
+
+  
+#countDiv {
+  color: white;
+  display: inline-block;
+  margin: 0 auto;
+  font-size: 30px;
+  width: 13%;
+  padding-top: 1%;
+}
+
+#countDiv > div {
+    padding:10px;
+    background-color:#38556A;
+    border-radius: 10% ;
+    display:inline-block;
+}
+
+#countDiv div > span {
+    padding:15px;
+    background-color:#4C6983;
+    border-radius: 15%;
+    display: inline-block;
+    transition:all 2s;
+}
+
+#countDiv div > span:hover {
+    transform:scale(1.4)
+}
+
+.smallText{
+    font-weight:900;
+	padding-top: 5px;
+	font-size: 16px;
+}
+.days{
+  color: #efce2d;
+}
+.hours{
+  color: #ff6600;
+}

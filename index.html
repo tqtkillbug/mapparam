@@ -13,7 +13,7 @@
 </head>
 <body>
     
-    <div class="container">
+    <div class="container-fluid">
       <marquee id="notify">Well come to Mapparam App. New update version 1.2 : Update all UI, fix error with param = null. Have a good day at work.</marquee>
        <div class="row mt-4 ">
         <div class="container-vs">
@@ -41,76 +41,30 @@
        </div>
       </div>
       <div class="row mt-5">
-        <div class="container-vs">
-          <div class="container__item">
-            <form class="form">
-                <textarea style="height: 350px;" class="form__field_r"  placeholder="Query SQL Full" id="result" ></textarea>
-                 <button type="button" class="btn btn--yellow btn--inside_r uppercase"  onclick="copy()">Copy</button>
-            </form>
-          </div>
+          <div class="container-vs">
+            <div class="container__item">
+              <form class="form">
+                  <textarea style="height: 350px;" class="form__field_r"  placeholder="Query SQL Full" id="result" ></textarea>
+                   <button type="button" class="btn btn--yellow btn--inside_r uppercase"  onclick="copy()">Copy</button>
+              </form>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div id='countDiv'>
+          <div>
+            <span class='days'></span>
+            <div class='smallText'>Days</div>
+        </div>
+        <div>
+          <span class='hours'></span>
+          <div class='smallText'>Hours</div>
        </div>
+        </div>
       </div>
     </div>
 
-      <!-- Modal -->
-<div class="modal fade " id="loadingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="row"> 
-        <div class="col-2">
-          <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-        <div class="col-2">
-          <div class="spinner-border text-secondary" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-        <div class="col-2">
-          <div class="spinner-border text-success" role="status">
-            <span class="visually-hidden"></span>
-          </div>
 
-        </div>
-        <div class="col-2">
-          
-      <div class="spinner-border text-danger" role="status">
-        <span class="visually-hidden"></span>
-      </div>
-        </div>
-        <div class="col-2">
-          <div class="spinner-border text-warning" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-        <div class="col-2">
-          <div class="spinner-border text-info" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      </div>
-     
-   <!-- Button trigger modal -->
-
-
-     
-    </div>
-  </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="tutorial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-        <video width="1000" controls>
-          <source src="./public/totuorial.webm" type="video/webm">
-        </video>
-    </div>
-  </div>
-</div>
     
 <footer class="text-center footer">Design & Develop By TQT</footer>
 

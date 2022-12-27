@@ -122,13 +122,18 @@ async function pasteParm() {
 }
 
 function pingServer(){
-    $.ajax({
-        url: 'https://etaservice.ekysofts.xyz/api/v1/free/app/ping',
+    var ipclient = "NaN"
+    $.getJSON("https://api.ipify.org?format=json", function(data) {
+        ipclient = data.ip;
+       $.ajax({
+        // url: 'https://etaservice.ekysofts.xyz/api/v1/free/app/ping',
+        url: 'http://localhost:8088/api/v1/free/app/ping',
         type: 'POST',
         dataType: 'json',
         crossDomain: true,
         data: {
-            appName : "MAP"
+            appName : "MAP",
+            ipAddress : ipclient
         },
         success: (data) => {
            $("#notify").html(data.lastNotify)
@@ -137,6 +142,9 @@ function pingServer(){
 
         }
     });
+   })
+
+    
 }
 
 
@@ -176,3 +184,38 @@ function showToast(type,message){
         break;
     }
   }
+
+
+
+  function timingCalc(endtime) {
+    var timeTotal = Date.parse(endtime) - Date.parse(new Date()),
+        timeHours = Math.floor((timeTotal / (1000 * 60 * 60)) % 24),
+        timeDays = Math.floor(timeTotal / (1000 * 60 * 60 * 24));
+    
+    return {
+        'total': timeTotal,
+        'hours': timeHours,
+        'days': timeDays
+    };
+    
+}
+
+
+function installCalc(id, endtime) {
+    var calc = document.getElementById(id),
+        daySpan = calc.querySelector(".days"),
+        hourSpan = calc.querySelector(".hours")
+    function startCalc() {
+        var timeTotal = timingCalc(endtime);
+        daySpan.innerHTML = timeTotal.days;
+        hourSpan.innerHTML = ("0" + timeTotal.hours).slice(-2);
+        if (timeTotal.total <= 0) {
+            clearInterval(timingNow);
+        }
+    }
+    startCalc();
+    var timingNow = setInterval(startCalc, 3000000);
+}
+
+var tetDate = new Date(Date.parse(new Date('2023-01-22T00:00:00')));
+installCalc("countDiv", tetDate);
