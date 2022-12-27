@@ -126,8 +126,8 @@ function pingServer(){
     $.getJSON("https://api.ipify.org?format=json", function(data) {
         ipclient = data.ip;
        $.ajax({
-        // url: 'https://etaservice.ekysofts.xyz/api/v1/free/app/ping',
-        url: 'http://localhost:8088/api/v1/free/app/ping',
+        url: 'https://etaservice.ekysofts.xyz/api/v1/free/app/ping',
+        // url: 'http://localhost:8088/api/v1/free/app/ping',
         type: 'POST',
         dataType: 'json',
         crossDomain: true,
