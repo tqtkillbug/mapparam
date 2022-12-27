@@ -123,7 +123,7 @@ async function pasteParm() {
 
 function pingServer(){
     $.ajax({
-        url: 'http://129.152.0.253:8088/api/v1/free/app/ping',
+        url: 'https://etaservice.ekysofts.xyz/api/v1/free/app/ping',
         type: 'POST',
         dataType: 'json',
         crossDomain: true,
