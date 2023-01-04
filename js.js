@@ -8,14 +8,14 @@ var listParamObj = [];
     for (let i = 0; i < listParam.length; i++) {
         listParam[i].trim();
         if(!listParam[i].includes('(') || !listParam[i].includes(')')){
-            if(listParam[i] !== "null"){
+            if(listParam[i].trim() !== "null"){
                 showToast(4, "Input valid, try again or view tutorial")
                 return
             }
         }
         var arr = listParam[i].split("(");
-        var vl = arr[0];
-        var type = arr[1];
+        var vl = arr[0].trim();
+        var type = arr[1].trim();
         if (type !== "" && type !== undefined && type !== null) {
             type = type.substring(0, type.length - 1);
         } else if(type == undefined && vl === "null"){
