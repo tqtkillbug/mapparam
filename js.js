@@ -15,7 +15,7 @@ var listParamObj = [];
         }
         var arr = listParam[i].split("(");
         var vl = arr[0].trim();
-        var type = arr[1].trim();
+        var type = arr[1];
         if (type !== "" && type !== undefined && type !== null) {
             type = type.substring(0, type.length - 1);
         } else if(type == undefined && vl === "null"){
