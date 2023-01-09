@@ -1,4 +1,6 @@
 pingServer();
+getListNew();
+
 function mappingParam() {
 const mappingBtn = document.getElementById("map-btn");
 var listParamObj = [];
@@ -219,3 +221,85 @@ function installCalc(id, endtime) {
 
 var tetDate = new Date(Date.parse(new Date('2023-01-22T00:00:00')));
 installCalc("countDiv", tetDate);
+
+// Get News
+function getListNew() {
+    $.ajax({
+        url: 'https://etaservice.ekysofts.xyz/api/v1/free/app/news/last',
+        // url: 'http://localhost:8088/api/v1/free/app/news/last',
+        type: 'GET',
+        success: (data) => {
+            if(data){
+               var listNew = JSON.parse(data); 
+               if(listNew.length > 0){
+                listNew.forEach(n => {
+                   var newsHtml = `
+                   <li class="li-new-item" style="display:none;">
+                    <a href="${n.urlFull}" target="_blank" ">
+                     <div class="row">
+                       <div class="col-3">
+                         <img class="thumbNew" src="${n.urlThumbImage}" alt="">
+                        ${getLogoNew(n.source)}
+                       </div>
+                       <div class="col-9">
+                       <p class="title-new" ${checkTooltip(n.title)} >${n.title}</p>
+                       </div>
+                   </div>
+                   </a>
+                 </li>
+                   `
+                   $(newsHtml).appendTo('#divNews').fadeIn('slow');
+                });
+            }
+            loadTooltip();
+            }
+        },
+        done: () => {
+
+        }
+    });
+}
+
+function loadTooltip(){
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+}
+
+function getLogoNew(source) {
+    if(source == "GenK"){
+      return `
+      <span class="genk-tag">
+      <img class="genk-lg" src="https://static.mediacdn.vn/genk/web_images/logogenk.svg" alt="">
+      </span>
+      `
+    } else if(source == "Kenh14"){
+        return `
+        <span class="kenh14-tag">
+        <img class="kenh14-lg" src="https://kenh14cdn.com/web_images/k14_logo2022.svg" alt="">
+      </span>`
+
+    } else if(source == "CafeBiz"){
+        return `
+         <span class="cafebiz-tag">                         
+        <img class="cafebiz-lg" src="https://cafebiz.cafebizcdn.vn/web_images/cafebiz_logo_30052022.svg" alt="">
+        </span>`
+    }
+    else{
+        return `
+          <span class="cafebiz-tag">                         
+          NaN
+         </span>
+        `
+    }
+}
+
+function checkTooltip(title){
+    if(title.length > 80){
+        return `
+        data-bs-toggle="tooltip" title="${title}" 
+        `
+    } 
+     return '';
+}

@@ -194,7 +194,7 @@
   display: inline-block;
   margin: 0 auto;
   font-size: 30px;
-  width: 13%;
+  width: 77%;
   padding-top: 1%;
 }
 
@@ -227,4 +227,113 @@
 }
 .hours{
   color: #ff6600;
+}
+
+/* News CSS */
+#divNews{
+  height: 500px;
+  border: 1px solid #38556A;
+  border-radius: 10px;
+  padding: 11px;
+  overflow: auto;
+}
+
+.thumbNew{
+  height: 60px;
+  width: 60px;
+  border-radius: 4px;
+}
+
+.li-new-item{
+  list-style-type: none;
+  border: #4C6983 2px solid;
+  margin: 5px 0;
+  border-radius: 5px;
+  background-color: #1f3a5296;
+}
+.li-new-item a{
+  text-decoration: none;
+}
+
+ul{
+  padding: 0;
+}
+
+.title-new{
+  overflow: hidden;
+  margin: 0;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 20px;
+  max-height: 81px;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  font-family: SFD-Bold;
+  font-weight: normal;
+  color: rgb(255, 255, 255);
+      padding: 3px 0;
+}
+
+.title-new:hover{
+  color: rgb(140, 241, 221);
+}
+
+.genk-tag{
+  font-size: 13px;
+  background-color: #222222;
+  padding: 0px 5px;
+  border-radius: 4px;
+}
+
+.cafebiz-tag{
+  color: #C80000;
+  font-size: 13px;
+  background-color: #E3E3E3;
+  padding: 0px 8px;
+  border-radius: 4px;
+}
+
+.kenh14-tag{
+  font-size: 13px;
+  background-color: #F18B1E;
+  padding: 0px;
+  padding: 0px 9px;
+  border-radius: 4px;
+}
+
+.kenh14-lg{
+  height: 20px;
+  width: 43px;
+}
+.cafebiz-lg{
+  height: 20px;
+  width: 44px;
+}
+
+.genk-lg{
+  height: 20px;
+  width: 51px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  border-radius: 10px;
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 6px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(56, 56, 56); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #6b6b6b; 
 }
