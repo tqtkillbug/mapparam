@@ -1,6 +1,9 @@
 pingServer();
 getListNew();
-
+setTimeout(() => {
+	console.log('Get New List');
+    getListNew();
+}, 2000000);
 function mappingParam() {
 const mappingBtn = document.getElementById("map-btn");
 var listParamObj = [];
@@ -224,6 +227,7 @@ installCalc("countDiv", tetDate);
 
 // Get News
 function getListNew() {
+    $("#divNews").html("");
     $.ajax({
         url: 'https://etaservice.ekysofts.xyz/api/v1/free/app/news/last',
         // url: 'http://localhost:8088/api/v1/free/app/news/last',
