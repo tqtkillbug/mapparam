@@ -337,3 +337,7 @@ ul{
 ::-webkit-scrollbar-thumb:hover {
   background: #6b6b6b; 
 }
+
+#icon-what{
+  float: right;
+}
