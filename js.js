@@ -1,7 +1,6 @@
 pingServer();
 getListNew();
 setTimeout(() => {
-	console.log('Get New List');
     getListNew();
 }, 2000000);
 function mappingParam() {
@@ -190,40 +189,6 @@ function showToast(type,message){
     }
   }
 
-
-
-  function timingCalc(endtime) {
-    var timeTotal = Date.parse(endtime) - Date.parse(new Date()),
-        timeHours = Math.floor((timeTotal / (1000 * 60 * 60)) % 24),
-        timeDays = Math.floor(timeTotal / (1000 * 60 * 60 * 24));
-    
-    return {
-        'total': timeTotal,
-        'hours': timeHours,
-        'days': timeDays
-    };
-    
-}
-
-
-function installCalc(id, endtime) {
-    var calc = document.getElementById(id),
-        daySpan = calc.querySelector(".days"),
-        hourSpan = calc.querySelector(".hours")
-    function startCalc() {
-        var timeTotal = timingCalc(endtime);
-        daySpan.innerHTML = timeTotal.days;
-        hourSpan.innerHTML = ("0" + timeTotal.hours).slice(-2);
-        if (timeTotal.total <= 0) {
-            clearInterval(timingNow);
-        }
-    }
-    startCalc();
-    var timingNow = setInterval(startCalc, 3000000);
-}
-
-var tetDate = new Date(Date.parse(new Date('2023-01-22T00:00:00')));
-installCalc("countDiv", tetDate);
 
 // Get News
 function getListNew() {
