@@ -298,3 +298,37 @@ ul{
 #icon-what{
   float: right;
 }
+
+.query-his{
+  padding-left: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.btn-his{
+  background-color: transparent;
+  font-size: 18px;
+  width: 30px;
+  height: 40px;
+  border: none;
+  color: #C80000;
+  margin-top: 20px;
+  margin-left: -10px;
+}
+
+.btn-his:hover{
+  color: red;
+
+}
+
+.cr-green{
+  color: rgb(21, 214, 3);
+}
+
+#divHisto{
+  height: 500px;
+  border: 1px solid #38556A;
+  border-radius: 10px;
+  padding: 11px;
+  overflow: auto;
+}

@@ -1,18 +1,23 @@
 pingServer();
+
 getListNew();
-setTimeout(() => {
-    getListNew();
-}, 2000000);
+
+setInterval(getListNew, 30 * 60 * 1000);
+
+var listHistory = [];
+
+initHistory();
+
 function mappingParam() {
-const mappingBtn = document.getElementById("map-btn");
-var listParamObj = [];
+    const mappingBtn = document.getElementById("map-btn");
+    var listParamObj = [];
     var quey = document.getElementById("queyinput").value
     var param = document.getElementById("paramInput").value
     var listParam = param.split(',');
     for (let i = 0; i < listParam.length; i++) {
         listParam[i].trim();
-        if(!listParam[i].includes('(') || !listParam[i].includes(')')){
-            if(listParam[i].trim() !== "null"){
+        if (!listParam[i].includes('(') || !listParam[i].includes(')')) {
+            if (listParam[i].trim() !== "null") {
                 showToast(4, "Input valid, try again or view tutorial")
                 return
             }
@@ -22,10 +27,10 @@ var listParamObj = [];
         var type = arr[1];
         if (type !== "" && type !== undefined && type !== null) {
             type = type.substring(0, type.length - 1);
-        } else if(type == undefined && vl === "null"){
+        } else if (type == undefined && vl === "null") {
             type = null;
         } else {
-           showToast(4, "Input valid, try again or view tutorial")
+            showToast(4, "Input valid, try again or view tutorial")
             return
         }
         const paramObj = {
@@ -47,8 +52,8 @@ var listParamObj = [];
         showToast(4, "Input valid, try again or view tutorial")
         return
     }
- 
-  mappingBtn.classList.add("loading");
+
+    mappingBtn.classList.add("loading");
     $.ajax({
         url: 'https://sqlformat.org/api/v1/format',
         type: 'POST',
@@ -60,12 +65,14 @@ var listParamObj = [];
         },
         success: (data) => {
             document.getElementById('result').value = data.result;
-            showToast(2,"Mapping Param To Query Success")
+            pushHistorty(data.result, quey, param);
+            showToast(2, "Mapping Param To Query Success")
             mappingBtn.classList.remove("loading")
+
         },
-        error:() =>{
-          showToast(3,"Mapping Param Erorr Please Try Again!")
-          mappingBtn.classList.remove("loading")
+        error: () => {
+            showToast(3, "Mapping Param Erorr Please Try Again!")
+            mappingBtn.classList.remove("loading")
         },
         done: () => {
             mappingBtn.classList.remove("loading")
@@ -73,7 +80,7 @@ var listParamObj = [];
     });
 }
 
-function getPramByIndex(indexs,listParamObj) {
+function getPramByIndex(indexs, listParamObj) {
     for (let index = 0; index < listParamObj.length; index++) {
         const element = listParamObj[index];
         if (element.index == indexs) {
@@ -125,69 +132,69 @@ async function pasteParm() {
     $("#paramInput").val(text);
 }
 
-function pingServer(){
+function pingServer() {
     var ipclient = "NaN"
-    $.getJSON("https://api.ipify.org?format=json", function(data) {
+    $.getJSON("https://api.ipify.org?format=json", function (data) {
         ipclient = data.ip;
-       $.ajax({
-        url: 'https://etaservice.ekysofts.xyz/api/v1/free/app/ping',
-        // url: 'http://localhost:8088/api/v1/free/app/ping',
-        type: 'POST',
-        dataType: 'json',
-        crossDomain: true,
-        data: {
-            appName : "MAP",
-            ipAddress : ipclient
-        },
-        success: (data) => {
-           $("#notify").html(data.lastNotify)
-        },
-        done: () => {
+        $.ajax({
+            url: 'https://etaservice.ekysofts.xyz/api/v1/free/app/ping',
+            // url: 'http://localhost:8088/api/v1/free/app/ping',
+            type: 'POST',
+            dataType: 'json',
+            crossDomain: true,
+            data: {
+                appName: "MAP",
+                ipAddress: ipclient
+            },
+            success: (data) => {
+                $("#notify").html(data.lastNotify)
+            },
+            done: () => {
 
-        }
-    });
-   })
+            }
+        });
+    })
 
-    
+
 }
 
 
 
 ///////////////////////
-function showToast(type,message){
-    switch(type) {
-      case 1:
-        iziToast.show({
-          theme: 'dark',
-          position : "bottomLeft",
-          displayMode: 'replace',
-          message: message,
-          progressBarColor: 'rgb(0, 255, 184)',
-        });
-        break;
-      case 2:
-        iziToast.success({
-          displayMode: 'replace',
-          position : "bottomLeft",
-          message: message,
-        });
-        break;
+function showToast(type, message) {
+    switch (type) {
+        case 1:
+            iziToast.show({
+                theme: 'dark',
+                position: "bottomLeft",
+                displayMode: 'replace',
+                message: message,
+                progressBarColor: 'rgb(0, 255, 184)',
+            });
+            break;
+        case 2:
+            iziToast.success({
+                displayMode: 'replace',
+                position: "bottomLeft",
+                message: message,
+            });
+            break;
         case 3:
-          iziToast.error({
-          displayMode: 'replace',
-          position : "bottomLeft",
-          message:message,
-        });
-        break;
-          case 4:
+            iziToast.error({
+                displayMode: 'replace',
+                position: "bottomLeft",
+                message: message,
+            });
+            break;
+        case 4:
             iziToast.warning({
-                 displayMode: 'replace',
-                 position : "bottomLeft",
-                 message:message,
-              });
-        break;
+                displayMode: 'replace',
+                position: "bottomLeft",
+                message: message,
+            });
+            break;
     }
-  }
+}
 
 
 // Get News
@@ -198,11 +205,11 @@ function getListNew() {
         // url: 'http://localhost:8088/api/v1/free/app/news/last',
         type: 'GET',
         success: (data) => {
-            if(data){
-               var listNew = JSON.parse(data); 
-               if(listNew.length > 0){
-                listNew.forEach(n => {
-                   var newsHtml = `
+            if (data) {
+                var listNew = JSON.parse(data);
+                if (listNew.length > 0) {
+                    listNew.forEach(n => {
+                        var newsHtml = `
                    <li class="li-new-item" style="display:none;">
                     <a href="${n.urlFull}" target="_blank" ">
                      <div class="row">
@@ -217,10 +224,10 @@ function getListNew() {
                    </a>
                  </li>
                    `
-                   $(newsHtml).appendTo('#divNews').fadeIn('slow');
-                });
-            }
-            loadTooltip();
+                        $(newsHtml).appendTo('#divNews').fadeIn('slow');
+                    });
+                }
+                loadTooltip();
             }
         },
         done: () => {
@@ -229,33 +236,33 @@ function getListNew() {
     });
 }
 
-function loadTooltip(){
+function loadTooltip() {
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl)
-})
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
 }
 
 function getLogoNew(source) {
-    if(source == "GenK"){
-      return `
+    if (source == "GenK") {
+        return `
       <span class="genk-tag">
       <img class="genk-lg" src="https://static.mediacdn.vn/genk/web_images/logogenk.svg" alt="">
       </span>
       `
-    } else if(source == "Kenh14"){
+    } else if (source == "Kenh14") {
         return `
         <span class="kenh14-tag">
         <img class="kenh14-lg" src="https://kenh14cdn.com/web_images/k14_logo2022.svg" alt="">
       </span>`
 
-    } else if(source == "CafeBiz"){
+    } else if (source == "CafeBiz") {
         return `
          <span class="cafebiz-tag">                         
         <img class="cafebiz-lg" src="https://cafebiz.cafebizcdn.vn/web_images/cafebiz_logo_30052022.svg" alt="">
         </span>`
     }
-    else{
+    else {
         return `
           <span class="cafebiz-tag">                         
           NaN
@@ -264,11 +271,65 @@ function getLogoNew(source) {
     }
 }
 
-function checkTooltip(title){
-    if(title.length > 80){
+function checkTooltip(title) {
+    if (title.length > 80) {
         return `
         data-bs-toggle="tooltip" title="${title}" 
         `
-    } 
-     return '';
+    }
+    return '';
 }
+
+function pushHistorty(result, query, param) {
+    const item = {
+        result: result,
+        query: query,
+        param: param,
+        id: listHistory.length
+    }
+    listHistory.reverse();
+    listHistory.push(item);
+    localStorage.setItem("listHistory", JSON.stringify(listHistory));
+    initHistory();
+}
+
+function initHistory() {
+    listHistory = JSON.parse(localStorage.getItem("listHistory", listHistory));
+    if (listHistory == null) {
+        listHistory = [];
+    }
+    console.log(listHistory)
+    $('#divHisto').html('');
+    listHistory.reverse();
+    listHistory.forEach(n => {
+        var hisItem = `
+                   <li class="li-new-item" >
+                   <div >
+                     <div class="row">
+                       <div class="col-10"  data-bs-toggle="tooltip" title='${n.result}'>
+                        <p class="title-new query-his" onclick="appplyQuery(${n.id})" >${n.result} </p>
+                       </div>
+                       <div class="col-2">
+                           <button class="btn-his cr-red" >✘</button>
+                       </div>
+                   </div>
+                   </div>
+               </li>
+                   `
+        $(hisItem).appendTo('#divHisto').fadeIn('slow');
+    });
+    loadTooltip();
+}
+
+
+function appplyQuery(id) {
+    var length = listHistory.length;
+    var index = length - 1 - id;
+    const itemPick = listHistory[index];
+    if (itemPick != null) {
+        document.getElementById('result').value = itemPick.result;
+        document.getElementById("queyinput").value = itemPick.query;
+        document.getElementById("paramInput").value = itemPick.param;
+        showToast(1, "Apply history success!")
+    }
+}    
