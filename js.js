@@ -12,6 +12,7 @@ function mappingParam() {
     const mappingBtn = document.getElementById("map-btn");
     var listParamObj = [];
     var quey = document.getElementById("queyinput").value
+    var queyOri = document.getElementById("queyinput").value
     var param = document.getElementById("paramInput").value
     var listParam = param.split(',');
     for (let i = 0; i < listParam.length; i++) {
@@ -65,7 +66,7 @@ function mappingParam() {
         },
         success: (data) => {
             document.getElementById('result').value = data.result;
-            pushHistorty(data.result, quey, param);
+            pushHistorty(data.result, queyOri, param);
             showToast(2, "Mapping Param To Query Success")
             mappingBtn.classList.remove("loading")
 
@@ -298,7 +299,6 @@ function initHistory() {
     if (listHistory == null) {
         listHistory = [];
     }
-    console.log(listHistory)
     $('#divHisto').html('');
     listHistory.reverse();
     listHistory.forEach(n => {
