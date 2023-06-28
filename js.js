@@ -94,6 +94,9 @@ function getPramByIndex(indexs, listParamObj) {
                     case "timestamp":
                         vl = '"' + element.vl.trim() + '"'
                         break;
+                    case "localdate":
+                        vl = '"' + element.vl.trim() + '"'
+                        break;
                     default:
                         vl = element.vl;
                 }
@@ -302,21 +305,25 @@ function initHistory() {
     $('#divHisto').html('');
     listHistory.reverse();
     listHistory.forEach(n => {
-        var hisItem = `
+        if (n != null) {
+
+            var toolTipText = n.result.replaceAll('"', "'");
+            var hisItem = `
                    <li class="li-new-item" >
                    <div >
                      <div class="row">
-                       <div class="col-10"  data-bs-toggle="tooltip" title='${n.result}'>
+                       <div class="col-10"  data-bs-toggle="tooltip" title="${toolTipText}">
                         <p class="title-new query-his" onclick="appplyQuery(${n.id})" >${n.result} </p>
                        </div>
                        <div class="col-2">
-                           <button class="btn-his cr-red" >✘</button>
+                           <button class="btn-his cr-red" onclick="removeQuery(${n.id})" >✘</button>
                        </div>
                    </div>
                    </div>
                </li>
                    `
-        $(hisItem).appendTo('#divHisto').fadeIn('slow');
+            $(hisItem).appendTo('#divHisto').fadeIn('slow');
+        };
     });
     loadTooltip();
 }
@@ -332,4 +339,13 @@ function appplyQuery(id) {
         document.getElementById("paramInput").value = itemPick.param;
         showToast(1, "Apply history success!")
     }
-}    
+}
+
+function removeQuery(id) {
+    var length = listHistory.length;
+    var index = length - 1 - id;
+    listHistory[index] = null;
+    listHistory.reverse();
+    localStorage.setItem("listHistory", JSON.stringify(listHistory));
+    initHistory();
+}
