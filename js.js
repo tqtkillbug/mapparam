@@ -137,28 +137,23 @@ async function pasteParm() {
 }
 
 function pingServer() {
-    var ipclient = "NaN"
-    $.getJSON("https://api.ipify.org?format=json", function (data) {
-        ipclient = data.ip;
-        $.ajax({
-            url: 'https://etaservice.ekysofts.xyz/api/v1/free/app/ping',
-            // url: 'http://localhost:8088/api/v1/free/app/ping',
-            type: 'POST',
-            dataType: 'json',
-            crossDomain: true,
-            data: {
-                appName: "MAP",
-                ipAddress: ipclient
-            },
-            success: (data) => {
-                $("#notify").html(data.lastNotify)
-            },
-            done: () => {
+    $.ajax({
+        url: 'https://etaservice.ekysofts.xyz/api/v1/free/app/ping',
+        // url: 'http://localhost:8088/api/v1/free/app/ping',
+        type: 'POST',
+        dataType: 'json',
+        crossDomain: true,
+        data: {
+            appName: "MAP",
+            ipAddress: "888.8.8.8.8"
+        },
+        success: (data) => {
+            $("#notify").html(data.lastNotify)
+        },
+        done: () => {
 
-            }
-        });
-    })
-
+        }
+    });
 
 }
 
