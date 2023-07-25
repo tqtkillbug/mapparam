@@ -8,6 +8,22 @@ var listHistory = [];
 
 initHistory();
 
+
+
+const socket = new SockJS('https://etaservice.ekysofts.xyz/websocket-endpoint');
+const stompClient = Stomp.over(socket);
+function handleUserLeft() {
+    stompClient.send("/app/user-left", {}, "username");
+}
+
+stompClient.connect({}, function (frame) {
+    stompClient.send("/app/user-joined", {}, "username");
+    stompClient.subscribe('/topic/user-count', function (userCount) {
+        document.getElementById('usersOnlines').innerText = userCount.body;
+    });
+});
+window.addEventListener('beforeunload', handleUserLeft);
+
 function mappingParam() {
     const mappingBtn = document.getElementById("map-btn");
     var listParamObj = [];
@@ -149,6 +165,7 @@ function pingServer() {
         },
         success: (data) => {
             $("#notify").html(data.lastNotify)
+            $("#totalVisit").html(data.totalVisit)
         },
         done: () => {
 
@@ -344,3 +361,4 @@ function removeQuery(id) {
     localStorage.setItem("listHistory", JSON.stringify(listHistory));
     initHistory();
 }
+

@@ -332,3 +332,16 @@ ul{
   padding: 11px;
   overflow: auto;
 }
+
+#boxCount{
+  height: 50px;
+  width: 310px;
+  border: 1px solid #38556A;
+  border-radius: 10px;
+  padding: 5px;
+  overflow: auto;
+  color: #ffffff;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-left: 20px;
+}
