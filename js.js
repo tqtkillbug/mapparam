@@ -10,19 +10,23 @@ initHistory();
 
 
 
-const socket = new SockJS('https://etaservice.ekysofts.xyz/websocket-endpoint');
+const socket = new SockJS('https://service.etasoft.tech/websocket');
 const stompClient = Stomp.over(socket);
-function handleUserLeft() {
-    stompClient.send("/app/user-left", {}, "username");
-}
 
 stompClient.connect({}, function (frame) {
-    stompClient.send("/app/user-joined", {}, "username");
-    stompClient.subscribe('/topic/user-count', function (userCount) {
-        document.getElementById('usersOnlines').innerText = userCount.body;
+    const subscription1 = stompClient.subscribe('/topic/onlineUsers', function (response) {
+        const onlineUsers = JSON.parse(response.body);
+        document.getElementById('usersOnlines').innerText = onlineUsers / 2;
+    });
+
+    stompClient.send('/app/requestEndpoint', {}, JSON.stringify({ key: 'value' }));
+    const subscription2 = stompClient.subscribe('/topic/onlineUserNow', function (response) {
+        const onlineUsers = JSON.parse(response.body);
+        document.getElementById('usersOnlines').innerText = onlineUsers / 2;
     });
 });
-window.addEventListener('beforeunload', handleUserLeft);
+
+
 
 function mappingParam() {
     const mappingBtn = document.getElementById("map-btn");
@@ -154,7 +158,7 @@ async function pasteParm() {
 
 function pingServer() {
     $.ajax({
-        url: 'https://etaservice.ekysofts.xyz/api/v1/free/app/ping',
+        url: 'https://service.etasoft.tech/api/v1/free/app/ping',
         // url: 'http://localhost:8088/api/v1/free/app/ping',
         type: 'POST',
         dataType: 'json',
@@ -217,7 +221,7 @@ function showToast(type, message) {
 function getListNew() {
     $("#divNews").html("");
     $.ajax({
-        url: 'https://etaservice.ekysofts.xyz/api/v1/free/app/news/last',
+        url: 'https://service.etasoft.tech/api/v1/free/app/news/last',
         // url: 'http://localhost:8088/api/v1/free/app/news/last',
         type: 'GET',
         success: (data) => {
