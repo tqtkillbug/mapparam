@@ -34,7 +34,7 @@ function mappingParam() {
     var quey = document.getElementById("queyinput").value
     var queyOri = document.getElementById("queyinput").value
     var param = document.getElementById("paramInput").value
-    var listParam = param.split(',');
+    var listParam = splitParameters(param);
     for (let i = 0; i < listParam.length; i++) {
         listParam[i].trim();
         if (!listParam[i].includes('(') || !listParam[i].includes(')')) {
@@ -101,6 +101,33 @@ function mappingParam() {
     });
 }
 
+function splitParameters(inputString) {
+    const results = [];
+    let current = '';
+    let depth = 0;
+
+    for (let i = 0; i < inputString.length; i++) {
+        const char = inputString[i];
+
+        if (char === '{' || char === '[' || char === '(') {
+            depth++;
+        } else if (char === '}' || char === ']' || char === ')') {
+            depth--;
+        }
+
+        if (char === ',' && depth === 0) {
+            results.push(current.trim());
+            current = '';
+        } else {
+            current += char;
+        }
+    }
+
+    results.push(current.trim());
+
+    return results;
+}
+
 function getPramByIndex(indexs, listParamObj) {
     for (let index = 0; index < listParamObj.length; index++) {
         const element = listParamObj[index];
@@ -133,6 +160,8 @@ function setCharAt(str, index, chr) {
     if (index > str.length - 1) return str;
     return str.substring(0, index) + chr + str.substring(index + 1);
 }
+
+
 
 function copy() {
     var text = document.getElementById("result").value;
