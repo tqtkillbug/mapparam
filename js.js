@@ -197,7 +197,7 @@ function pingServer() {
             ipAddress: "888.8.8.8.8"
         },
         success: (data) => {
-            $("#notify").html(data.lastNotify)
+            // $("#notify").html(data.lastNotify)
             $("#totalVisit").html(data.totalVisit)
         },
         done: () => {
